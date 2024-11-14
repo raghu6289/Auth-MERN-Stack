@@ -1,0 +1,11 @@
+pipeline {
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Clone the repository
+                git 'https://github.com/vijiptl/Raghu_App.git'
+            }
+        }
+    }
+
+}
