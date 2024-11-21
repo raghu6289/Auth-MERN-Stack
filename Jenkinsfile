@@ -52,7 +52,7 @@ pipeline {
                     docker push "$DOCKER_IMAGE:${env.BUILD_ID}"
                     
                     # Tag the image as 'latest' and push it
-                    docker tag "$DOCKER_IMAGE:${env.BUILD_ID}" "$DOCKER_IMAGE:latest"
+                    docker tag "$DOCKER_IMAGE:${env.BUILD_ID}" "$DOCKER_IMAGE:v1"
                     docker push "$DOCKER_IMAGE:latest"
                     """
                 }
