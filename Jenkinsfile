@@ -65,7 +65,7 @@ pipeline {
 	        withCredentials([file(credentialsId: KUBE_CONFIG_ID, variable: 'KUBECONFIG')]) {
 	            // Ensure kubectl is in the PATH
 	            withEnv(["PATH+KUBE=/usr/bin"]) {
-	                sh 'kubectl apply -f deployment.yaml --validate=false'
+	                sh 'kubectl apply -f deployment.yaml --request-timeout=60s'
 	            }
 	        }
 	    }
