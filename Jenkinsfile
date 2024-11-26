@@ -4,6 +4,7 @@ pipeline {
         NODE_HOME = tool name: 'node' // Set Node.js tool installed earlier
         PATH = "${NODE_HOME}/bin:${env.PATH}"
         DOCKER_CREDENTIALS_ID = 'docker-id'  // The Jenkins credentials ID
+		KUBE_CONFIG_ID = 'kubeconfig-credentials-id'
         DOCKER_IMAGE = "raghu6289/auth-mernstack"
     }
     stages {
@@ -58,13 +59,15 @@ pipeline {
                 }
             }
         }
-
-        stage('Apply Kubernetes Config') {
-                steps {
-                    withCredentials([file(credentialsId: KUBE_CONFIG_ID, variable: 'KUBECONFIG')]) {
-                    sh 'kubectl apply -f deployment.yaml'
-                    }
-            }
-}
-        }
+		
+		stage('Apply Kubernetes Config'){
+			steps {
+				withCredentials([file(credentialsId: KUBE_CONFIG_ID, variable: 'KUBECONFIG')]) {
+				 sh 'kubectl apply -f deployment.yaml'
+				}
+			
+			}
+		}
+       
+    }
 }
