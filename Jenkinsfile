@@ -58,5 +58,13 @@ pipeline {
                 }
             }
         }
-    }
+
+        stage('Apply Kubernetes Config') {
+                steps {
+                    withCredentials([file(credentialsId: KUBE_CONFIG_ID, variable: 'KUBECONFIG')]) {
+                    sh 'kubectl apply -f deployment.yaml'
+                    }
+            }
+}
+        }
 }
