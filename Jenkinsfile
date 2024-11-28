@@ -53,23 +53,23 @@ pipeline {
                     docker push "$DOCKER_IMAGE:${env.BUILD_ID}"
                     
                     # Tag the image as 'latest' and push it
-                    docker tag "$DOCKER_IMAGE:${env.BUILD_ID}" "$DOCKER_IMAGE:v1"
+                    docker tag "$DOCKER_IMAGE:${env.BUILD_ID}" "$DOCKER_IMAGE:latest"
                     docker push "$DOCKER_IMAGE:latest"
                     """
                 }
             }
         }
 		
-	stage('Apply Kubernetes Config') {
-	    steps {
-	        withCredentials([file(credentialsId: KUBE_CONFIG_ID, variable: 'KUBECONFIG')]) {
-	            // Ensure kubectl is in the PATH
-	            withEnv(["PATH+KUBE=/usr/bin"]) {
-	                sh 'kubectl apply -f deployment.yaml --request-timeout=60s'
-	            }
-	        }
-	    }
-	}
+	// stage('Apply Kubernetes Config') {
+	//     steps {
+	//         withCredentials([file(credentialsId: KUBE_CONFIG_ID, variable: 'KUBECONFIG')]) {
+	//             // Ensure kubectl is in the PATH
+	//             withEnv(["PATH+KUBE=/usr/bin"]) {
+	//                 sh 'kubectl apply -f deployment.yaml --request-timeout=60s'
+	//             }
+	//         }
+	//     }
+	// }
        
     }
 }
