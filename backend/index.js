@@ -33,7 +33,12 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(PORT, async () => {
+app.listen(5000, '0.0.0.0', async () => {
   await connectDB();
-  console.log("server is running at port", PORT);
+  console.log("server is running at port", 5000); 
 });
+
+// app.listen(PORT, async () => {
+//   await connectDB();
+//   console.log("server is running at port", PORT);
+// });
